@@ -1,0 +1,7 @@
+
+/home/runner/work/exp-lorawan-dei/exp-lorawan-dei/experiment/simulation/script.js
+   79:30  warning  'Chart' is not defined                          no-undef
+  240:11  warning  'timestamp' is assigned a value but never used  no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+
