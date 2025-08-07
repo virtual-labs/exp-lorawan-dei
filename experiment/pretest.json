@@ -2,37 +2,71 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "What does LoRaWAN stand for?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Long Range Wide Area Network",
+        "b": "Low Resistance Wireless Area Network",
+        "c": "Local Radio Wireless Area Network",
+        "d": "Logical Range Wide Application Network"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Correct. LoRaWAN stands for Long Range Wide Area Network. <a href='https://lora-alliance.org/about-lorawan/'>Learn more</a>",
+        "b": "Incorrect. This is not the correct expansion.",
+        "c": "Incorrect. LoRaWAN is not limited to local radio.",
+        "d": "Incorrect. This is not the actual full form."
       },
       "correctAnswer": "a",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "Which frequency bands does LoRaWAN commonly operate in?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Unlicensed ISM bands",
+        "b": "Licensed 5G bands",
+        "c": "Satellite communication bands",
+        "d": "FM radio bands"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Correct. LoRaWAN uses unlicensed ISM bands like 868 MHz (EU) or 915 MHz (US). <a href='https://www.thethingsnetwork.org/docs/lorawan/frequencies-by-country/'>See details</a>",
+        "b": "Incorrect. Licensed 5G bands are used for cellular networks.",
+        "c": "Incorrect. Satellite bands are not standard for LoRaWAN.",
+        "d": "Incorrect. FM radio is unrelated to IoT data transmission."
       },
-      "correctAnswer": "c",
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What is the main advantage of LoRaWAN in IoT applications?",
+      "answers": {
+        "a": "Long range and low power consumption",
+        "b": "High video streaming capability",
+        "c": "Fast gaming network speeds",
+        "d": "Large file transfer efficiency"
+      },
+      "explanations": {
+        "a": "Correct. LoRaWAN is optimized for low power, long range IoT communication. <a href='https://www.link-labs.com/blog/what-is-lorawan'>Read here</a>",
+        "b": "Incorrect. LoRaWAN is not designed for high-bandwidth streaming.",
+        "c": "Incorrect. Gaming networks require low latency, which is not LoRaWAN's focus.",
+        "d": "Incorrect. LoRaWAN is not intended for large file transfers."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which microcontrollers are used in this experiment?",
+      "answers": {
+        "a": "ESP8266/ESP32",
+        "b": "Arduino Uno without connectivity",
+        "c": "Raspberry Pi 4",
+        "d": "Intel Core i7"
+      },
+      "explanations": {
+        "a": "Correct. This experiment uses ESP8266 or ESP32 to interface with LoRaWAN. <a href='https://randomnerdtutorials.com/esp32-lora-rfm95-transceiver-arduino-ide/'>Learn more</a>",
+        "b": "Incorrect. Arduino Uno can work with LoRa but needs external modules.",
+        "c": "Incorrect. Raspberry Pi is not used in this setup.",
+        "d": "Incorrect. Intel Core i7 is a computer processor, not a microcontroller."
+      },
+      "correctAnswer": "a",
       "difficulty": "beginner"
     }
   ]

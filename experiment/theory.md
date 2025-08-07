@@ -1,1 +1,3 @@
-### Link your theory in here
+LoRaWAN (Long Range Wide Area Network) is a low-power, long-range communication protocol designed for Internet of Things (IoT) applications. It operates in unlicensed frequency bands and enables devices to communicate over distances of several kilometers while consuming minimal power, making it ideal for remote sensing and monitoring.
+
+In this experiment, LoRaWAN is combined with microcontrollers like ESP8266 or ESP32 to build an IoT application capable of collecting sensor data and transmitting it over long distances to a gateway. The gateway forwards this data to the internet, where it can be stored, processed, and visualized on a dashboard or cloud platform.
