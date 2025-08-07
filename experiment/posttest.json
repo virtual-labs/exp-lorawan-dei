@@ -2,37 +2,71 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "In this experiment, what role does LoRaWAN play?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Transmitting sensor data over long distances",
+        "b": "Providing internet browsing capabilities",
+        "c": "Running local applications",
+        "d": "Acting as a GPS system"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Correct. LoRaWAN is used to transmit data over long ranges with low power. <a href='https://lora-alliance.org/about-lorawan/'>More info</a>",
+        "b": "Incorrect. LoRaWAN does not provide internet browsing.",
+        "c": "Incorrect. Local applications are handled by the microcontroller.",
+        "d": "Incorrect. GPS is a separate technology."
       },
       "correctAnswer": "a",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "Why is ESP8266/ESP32 suitable for IoT applications?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "It has built-in Wi-Fi and can interface with LoRa modules",
+        "b": "It has a high-end graphics processor",
+        "c": "It works without any power supply",
+        "d": "It can only store large multimedia files"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Correct. ESP8266/ESP32 supports Wi-Fi and can work with LoRa for IoT projects. <a href='https://randomnerdtutorials.com/getting-started-with-esp32/'>Learn more</a>",
+        "b": "Incorrect. Graphics processing is not its purpose.",
+        "c": "Incorrect. It still requires power.",
+        "d": "Incorrect. It is not designed for multimedia storage."
       },
-      "correctAnswer": "c",
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What is a key benefit of using LoRaWAN in rural IoT projects?",
+      "answers": {
+        "a": "It covers long distances with minimal power usage",
+        "b": "It streams videos efficiently",
+        "c": "It allows online gaming in remote areas",
+        "d": "It provides free satellite TV"
+      },
+      "explanations": {
+        "a": "Correct. LoRaWAN’s long range and low power make it ideal for rural monitoring. <a href='https://www.thethingsnetwork.org/lorawan/'>See details</a>",
+        "b": "Incorrect. LoRaWAN is not made for video streaming.",
+        "c": "Incorrect. Gaming is not its target application.",
+        "d": "Incorrect. LoRaWAN is unrelated to satellite TV."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "In this experiment, where is the collected sensor data sent after reaching the gateway?",
+      "answers": {
+        "a": "To a cloud platform for storage and visualization",
+        "b": "Directly to a local printer",
+        "c": "To a USB flash drive",
+        "d": "To a Bluetooth headset"
+      },
+      "explanations": {
+        "a": "Correct. The gateway forwards data to a cloud platform for analysis. <a href='https://www.ibm.com/cloud/learn/iot'>Read more</a>",
+        "b": "Incorrect. A printer is not used in data storage.",
+        "c": "Incorrect. USB drives are not part of LoRaWAN cloud systems.",
+        "d": "Incorrect. Bluetooth headsets are unrelated."
+      },
+      "correctAnswer": "a",
       "difficulty": "beginner"
     }
   ]
