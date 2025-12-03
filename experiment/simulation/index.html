@@ -1,180 +1,518 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LoRaWAN IoT Simulation</title>
+    <title>IoT Virtual Lab - LoRaWAN & ESP32 Simulation</title>
+    <meta name="description"
+        content="Interactive virtual laboratory for simulating IoT applications using LoRaWAN protocol with ESP8266/ESP32 microcontrollers">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <h1>LoRaWAN IoT Simulation</h1>
-            <div class="controls">
-                <button id="startSimulation" class="btn primary">Start Simulation</button>
-                <button id="stopSimulation" class="btn danger" disabled>Stop Simulation</button>
-                <div class="simulation-speed">
-                    <label for="speedControl">Simulation Speed:</label>
-                    <select id="speedControl">
-                        <option value="1000">1x</option>
-                        <option value="500">2x</option>
-                        <option value="250">4x</option>
-                        <option value="100">10x</option>
-                    </select>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            <path d="M2 17l10 5 10-5" />
+                            <path d="M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1>IoT Virtual Laboratory</h1>
+                        <p class="subtitle">LoRaWAN & ESP32/ESP8266 Simulation</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-secondary" id="resetBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+                            <path d="M21 3v5h-5" />
+                        </svg>
+                        Reset
+                    </button>
+                    <button class="btn-primary" id="helpBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
+                        </svg>
+                        Help
+                    </button>
                 </div>
             </div>
         </header>
 
-        <main>
-            <section class="network-topology">
-                <h2>Network Topology</h2>
-                <div class="topology-container">
-                    <div class="device-node" id="esp32Node">
-                        <div class="node-icon">
-                            <i class="fas fa-microchip"></i>
-                        </div>
-                        <div class="node-label">ESP32</div>
-                        <div class="connection-line" id="loraConnection"></div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Panel - Configuration -->
+            <section class="panel config-panel">
+                <div class="panel-header">
+                    <h2>Device Configuration</h2>
+                    <span class="status-badge" id="deviceStatus">Not Configured</span>
+                </div>
+
+                <!-- Device Selection -->
+                <div class="config-section">
+                    <label class="config-label">
+                        <span class="label-text">
+                            Select Device
+                            <span class="tooltip-icon"
+                                data-tooltip="Choose between ESP8266 or ESP32 microcontroller">ⓘ</span>
+                        </span>
+                    </label>
+                    <div class="device-selector">
+                        <button class="device-card active" data-device="esp32">
+                            <div class="device-icon">ESP32</div>
+                            <div class="device-specs">
+                                <div>Dual-core</div>
+                                <div>WiFi + BT</div>
+                            </div>
+                        </button>
+                        <button class="device-card" data-device="esp8266">
+                            <div class="device-icon">ESP8266</div>
+                            <div class="device-specs">
+                                <div>Single-core</div>
+                                <div>WiFi</div>
+                            </div>
+                        </button>
                     </div>
-                    <div class="gateway-node" id="gatewayNode">
-                        <div class="node-icon">
-                            <i class="fas fa-broadcast-tower"></i>
+                </div>
+
+                <!-- LoRaWAN Credentials -->
+                <div class="config-section">
+                    <h3 class="section-title">LoRaWAN Credentials</h3>
+
+                    <div class="input-group">
+                        <label for="devEUI">
+                            Device EUI
+                            <span class="tooltip-icon"
+                                data-tooltip="64-bit unique identifier for the end device">ⓘ</span>
+                        </label>
+                        <div class="input-with-action">
+                            <input type="text" id="devEUI" placeholder="0000000000000000" maxlength="16"
+                                class="mono-input">
+                            <button class="btn-icon" id="genDevEUI" title="Generate Random">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" />
+                                </svg>
+                            </button>
                         </div>
-                        <div class="node-label">LoRa Gateway</div>
-                        <div class="connection-line" id="networkConnection"></div>
                     </div>
-                    <div class="server-node" id="serverNode">
+
+                    <div class="input-group">
+                        <label for="appEUI">
+                            Application EUI
+                            <span class="tooltip-icon" data-tooltip="64-bit identifier for the application">ⓘ</span>
+                        </label>
+                        <div class="input-with-action">
+                            <input type="text" id="appEUI" placeholder="0000000000000000" maxlength="16"
+                                class="mono-input">
+                            <button class="btn-icon" id="genAppEUI" title="Generate Random">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="appKey">
+                            Application Key
+                            <span class="tooltip-icon" data-tooltip="128-bit AES key for device activation">ⓘ</span>
+                        </label>
+                        <div class="input-with-action">
+                            <input type="text" id="appKey" placeholder="00000000000000000000000000000000" maxlength="32"
+                                class="mono-input">
+                            <button class="btn-icon" id="genAppKey" title="Generate Random">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LoRaWAN Parameters -->
+                <div class="config-section">
+                    <h3 class="section-title">LoRaWAN Parameters</h3>
+
+                    <div class="input-group">
+                        <label for="spreadingFactor">
+                            Spreading Factor: <span id="sfValue">7</span>
+                            <span class="tooltip-icon"
+                                data-tooltip="Higher SF = longer range but slower data rate">ⓘ</span>
+                        </label>
+                        <input type="range" id="spreadingFactor" min="7" max="12" value="7" class="slider">
+                        <div class="range-labels">
+                            <span>Fast</span>
+                            <span>Long Range</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="bandwidth">
+                            Bandwidth
+                            <span class="tooltip-icon" data-tooltip="Signal bandwidth in kHz">ⓘ</span>
+                        </label>
+                        <select id="bandwidth" class="select-input">
+                            <option value="125">125 kHz</option>
+                            <option value="250">250 kHz</option>
+                            <option value="500">500 kHz</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="codingRate">
+                            Coding Rate
+                            <span class="tooltip-icon" data-tooltip="Forward error correction rate">ⓘ</span>
+                        </label>
+                        <select id="codingRate" class="select-input">
+                            <option value="4/5">4/5</option>
+                            <option value="4/6">4/6</option>
+                            <option value="4/7">4/7</option>
+                            <option value="4/8">4/8</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Sensor Configuration -->
+                <div class="config-section">
+                    <h3 class="section-title">Sensor Configuration</h3>
+
+                    <div class="sensor-toggles">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="tempSensor" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Temperature (°C)</span>
+                        </label>
+
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="humiditySensor" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Humidity (%)</span>
+                        </label>
+
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="pressureSensor">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Pressure (hPa)</span>
+                        </label>
+
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="lightSensor">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Light (lux)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="btn-primary btn-large" id="activateBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
+                    Activate Device
+                </button>
+            </section>
+
+            <!-- Center Panel - Network Visualization -->
+            <section class="panel visualization-panel">
+                <div class="panel-header">
+                    <h2>Network Topology</h2>
+                    <div class="simulation-controls">
+                        <button class="btn-icon" id="startSimBtn" title="Start Transmission">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </button>
+                        <button class="btn-icon" id="pauseSimBtn" title="Pause" style="display:none;">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <rect x="6" y="4" width="4" height="16" />
+                                <rect x="14" y="4" width="4" height="16" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="network-canvas" id="networkCanvas">
+                    <!-- End Device -->
+                    <div class="network-node device-node" id="endDevice">
                         <div class="node-icon">
-                            <i class="fas fa-server"></i>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="5" y="2" width="14" height="20" rx="2" />
+                                <line x1="12" y1="18" x2="12.01" y2="18" />
+                            </svg>
+                        </div>
+                        <div class="node-label">End Device</div>
+                        <div class="node-sublabel" id="deviceType">ESP32</div>
+                        <div class="signal-indicator"></div>
+                    </div>
+
+                    <!-- Gateway -->
+                    <div class="network-node gateway-node" id="gateway">
+                        <div class="node-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+                                <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+                                <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+                                <circle cx="12" cy="20" r="1" />
+                            </svg>
+                        </div>
+                        <div class="node-label">LoRaWAN Gateway</div>
+                        <div class="node-sublabel">868 MHz</div>
+                    </div>
+
+                    <!-- Network Server -->
+                    <div class="network-node server-node" id="networkServer">
+                        <div class="node-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="2" width="20" height="8" rx="2" />
+                                <rect x="2" y="14" width="20" height="8" rx="2" />
+                                <line x1="6" y1="6" x2="6.01" y2="6" />
+                                <line x1="6" y1="18" x2="6.01" y2="18" />
+                            </svg>
                         </div>
                         <div class="node-label">Network Server</div>
+                        <div class="node-sublabel">Processing</div>
                     </div>
+
+                    <!-- Application Server -->
+                    <div class="network-node app-node" id="appServer">
+                        <div class="node-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 20h20" />
+                                <path d="M5 20V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16" />
+                                <path d="M9 6h6" />
+                                <path d="M9 10h6" />
+                                <path d="M9 14h6" />
+                            </svg>
+                        </div>
+                        <div class="node-label">Application Server</div>
+                        <div class="node-sublabel">Data Storage</div>
+                    </div>
+
+                    <!-- Connection Lines -->
+                    <svg class="connection-lines" id="connectionSVG">
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="rgba(139, 92, 246, 0.5)" />
+                            </marker>
+                        </defs>
+                        <path id="line1" class="connection-line" marker-end="url(#arrowhead)" />
+                        <path id="line2" class="connection-line" marker-end="url(#arrowhead)" />
+                        <path id="line3" class="connection-line" marker-end="url(#arrowhead)" />
+                    </svg>
+
+                    <!-- Animated Packets -->
+                    <div id="packetsContainer"></div>
                 </div>
-                <div class="connection-status">
-                    <div class="status-item">
-                        <span class="status-label">LoRa Connection:</span>
-                        <span class="status-value" id="loraStatus">Disconnected</span>
+
+                <!-- Transmission Log -->
+                <div class="transmission-log">
+                    <div class="log-header">
+                        <h3>Transmission Log</h3>
+                        <button class="btn-text" id="clearLogBtn">Clear</button>
                     </div>
-                    <div class="status-item">
-                        <span class="status-label">Network Server:</span>
-                        <span class="status-value" id="serverStatus">Disconnected</span>
-                    </div>
-                    <div class="status-item">
-                        <span class="status-label">Signal Strength:</span>
-                        <div class="signal-strength">
-                            <span class="status-value" id="signalStrength">-- dBm</span>
-                            <div class="signal-bars">
-                                <div class="signal-bar"></div>
-                                <div class="signal-bar"></div>
-                                <div class="signal-bar"></div>
-                                <div class="signal-bar"></div>
-                                <div class="signal-bar"></div>
-                            </div>
+                    <div class="log-content" id="logContent">
+                        <div class="log-entry log-info">
+                            <span class="log-time">--:--:--</span>
+                            <span class="log-message">System ready. Configure device and activate to begin.</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="device-panel">
-                <div class="device-info">
-                    <h2>Device Information</h2>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <span class="label">Device EUI:</span>
-                            <span class="value" id="deviceEUI">00:00:00:00:00:00:00:00</span>
+            <!-- Right Panel - Data Dashboard -->
+            <section class="panel dashboard-panel">
+                <div class="panel-header">
+                    <h2>Data Dashboard</h2>
+                    <span class="data-count">0 packets received</span>
+                </div>
+
+                <!-- Current Readings -->
+                <div class="readings-grid" id="readingsGrid">
+                    <div class="reading-card">
+                        <div class="reading-icon temp-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                            </svg>
                         </div>
-                        <div class="info-item">
-                            <span class="label">Network Status:</span>
-                            <span class="value" id="networkStatus">Disconnected</span>
+                        <div class="reading-info">
+                            <div class="reading-label">Temperature</div>
+                            <div class="reading-value" id="tempValue">--</div>
+                            <div class="reading-unit">°C</div>
                         </div>
-                        <div class="info-item">
-                            <span class="label">Last Transmission:</span>
-                            <span class="value" id="lastTx">Never</span>
+                        <div class="reading-chart" id="tempChart"></div>
+                    </div>
+
+                    <div class="reading-card">
+                        <div class="reading-icon humidity-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+                            </svg>
                         </div>
-                        <div class="info-item">
-                            <span class="label">Battery Level:</span>
-                            <span class="value" id="batteryLevel">100%</span>
+                        <div class="reading-info">
+                            <div class="reading-label">Humidity</div>
+                            <div class="reading-value" id="humidityValue">--</div>
+                            <div class="reading-unit">%</div>
+                        </div>
+                        <div class="reading-chart" id="humidityChart"></div>
+                    </div>
+
+                    <div class="reading-card" id="pressureCard" style="display:none;">
+                        <div class="reading-icon pressure-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 6v6l4 2" />
+                            </svg>
+                        </div>
+                        <div class="reading-info">
+                            <div class="reading-label">Pressure</div>
+                            <div class="reading-value" id="pressureValue">--</div>
+                            <div class="reading-unit">hPa</div>
+                        </div>
+                        <div class="reading-chart" id="pressureChart"></div>
+                    </div>
+
+                    <div class="reading-card" id="lightCard" style="display:none;">
+                        <div class="reading-icon light-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="5" />
+                                <line x1="12" y1="1" x2="12" y2="3" />
+                                <line x1="12" y1="21" x2="12" y2="23" />
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                                <line x1="1" y1="12" x2="3" y2="12" />
+                                <line x1="21" y1="12" x2="23" y2="12" />
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                            </svg>
+                        </div>
+                        <div class="reading-info">
+                            <div class="reading-label">Light</div>
+                            <div class="reading-value" id="lightValue">--</div>
+                            <div class="reading-unit">lux</div>
+                        </div>
+                        <div class="reading-chart" id="lightChart"></div>
+                    </div>
+                </div>
+
+                <!-- Network Statistics -->
+                <div class="stats-section">
+                    <h3 class="section-title">Network Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">Packets Sent</div>
+                            <div class="stat-value" id="packetsSent">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Packets Received</div>
+                            <div class="stat-value" id="packetsReceived">0</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Success Rate</div>
+                            <div class="stat-value" id="successRate">0%</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Avg RSSI</div>
+                            <div class="stat-value" id="avgRSSI">-- dBm</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Data Rate</div>
+                            <div class="stat-value" id="dataRate">-- bps</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Airtime</div>
+                            <div class="stat-value" id="airtime">-- ms</div>
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <section class="sensor-grid">
-                <div class="sensor-card">
-                    <div class="card-header">
-                        <h3>Temperature</h3>
-                        <i class="fas fa-thermometer-half"></i>
-                    </div>
-                    <div class="card-content">
-                        <div class="sensor-value" id="temperatureValue">--°C</div>
-                        <div class="chart-container">
-                            <canvas id="temperatureChart"></canvas>
+                <!-- Packet Details -->
+                <div class="packet-details" id="packetDetails">
+                    <h3 class="section-title">Last Packet Details</h3>
+                    <div class="packet-info">
+                        <div class="info-row">
+                            <span class="info-label">Frame Counter:</span>
+                            <span class="info-value mono" id="frameCounter">--</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Port:</span>
+                            <span class="info-value mono" id="port">--</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">RSSI:</span>
+                            <span class="info-value mono" id="rssi">--</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">SNR:</span>
+                            <span class="info-value mono" id="snr">--</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Frequency:</span>
+                            <span class="info-value mono" id="frequency">--</span>
                         </div>
                     </div>
-                </div>
-
-                <div class="sensor-card">
-                    <div class="card-header">
-                        <h3>Humidity</h3>
-                        <i class="fas fa-tint"></i>
-                    </div>
-                    <div class="card-content">
-                        <div class="sensor-value" id="humidityValue">--%</div>
-                        <div class="chart-container">
-                            <canvas id="humidityChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sensor-card">
-                    <div class="card-header">
-                        <h3>Air Quality</h3>
-                        <i class="fas fa-wind"></i>
-                    </div>
-                    <div class="card-content">
-                        <div class="sensor-value" id="airQualityValue">--</div>
-                        <div class="chart-container">
-                            <canvas id="airQualityChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sensor-card">
-                    <div class="card-header">
-                        <h3>Light Level</h3>
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <div class="card-content">
-                        <div class="sensor-value" id="lightValue">--</div>
-                        <div class="chart-container">
-                            <canvas id="lightChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="data-log">
-                <h2>Transmission Log</h2>
-                <div class="log-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Timestamp</th>
-                                <th>Temperature</th>
-                                <th>Humidity</th>
-                                <th>Air Quality</th>
-                                <th>Light Level</th>
-                                <th>Signal Strength</th>
-                            </tr>
-                        </thead>
-                        <tbody id="logTableBody"></tbody>
-                    </table>
                 </div>
             </section>
         </main>
     </div>
+
+    <!-- Help Modal -->
+    <div class="modal" id="helpModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Virtual Lab Guide</h2>
+                <button class="btn-icon" id="closeHelpBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3>Getting Started</h3>
+                <ol>
+                    <li><strong>Select Device:</strong> Choose between ESP32 or ESP8266</li>
+                    <li><strong>Configure LoRaWAN:</strong> Generate or enter DevEUI, AppEUI, and AppKey</li>
+                    <li><strong>Set Parameters:</strong> Adjust spreading factor, bandwidth, and coding rate</li>
+                    <li><strong>Enable Sensors:</strong> Toggle which sensors to simulate</li>
+                    <li><strong>Activate Device:</strong> Click "Activate Device" to join the network</li>
+                    <li><strong>Start Transmission:</strong> Click the play button to begin sending data</li>
+                </ol>
+
+                <h3>Understanding LoRaWAN</h3>
+                <p><strong>Spreading Factor (SF):</strong> Higher values increase range but reduce data rate. SF7 is
+                    fastest, SF12 has longest range.</p>
+                <p><strong>Bandwidth:</strong> Wider bandwidth = higher data rate but less sensitivity.</p>
+                <p><strong>Coding Rate:</strong> Forward error correction. Higher values add redundancy for reliability.
+                </p>
+
+                <h3>Network Components</h3>
+                <ul>
+                    <li><strong>End Device:</strong> Your ESP32/ESP8266 with sensors</li>
+                    <li><strong>Gateway:</strong> Receives LoRa packets and forwards to network server</li>
+                    <li><strong>Network Server:</strong> Manages devices, security, and routing</li>
+                    <li><strong>Application Server:</strong> Processes and stores sensor data</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
-</html> 
+
+</html>
