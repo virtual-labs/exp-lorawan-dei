@@ -2,72 +2,114 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "In this experiment, what role does LoRaWAN play?",
+      "question": "LoRaWAN stands for ___?",
       "answers": {
-        "a": "Transmitting sensor data over long distances",
-        "b": "Providing internet browsing capabilities",
-        "c": "Running local applications",
-        "d": "Acting as a GPS system"
+        "a": "Long Range Wide Area Network",
+        "b": "Low Range Wireless Access Network",
+        "c": "Local Radio Wide Access Network",
+        "d": "Long Radio Wireless Area Network"
       },
-      "explanations": {
-        "a": "Correct. LoRaWAN is used to transmit data over long ranges with low power. <a href='https://lora-alliance.org/about-lorawan/'>More info</a>",
-        "b": "Incorrect. LoRaWAN does not provide internet browsing.",
-        "c": "Incorrect. Local applications are handled by the microcontroller.",
-        "d": "Incorrect. GPS is a separate technology."
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
+      "correct": "a",
+      "difficulty": "intermediate"
     },
     {
-      "question": "Why is ESP8266/ESP32 suitable for IoT applications?",
+      "question": "LoRa is mainly used for ___-range communication.",
       "answers": {
-        "a": "It has built-in Wi-Fi and can interface with LoRa modules",
-        "b": "It has a high-end graphics processor",
-        "c": "It works without any power supply",
-        "d": "It can only store large multimedia files"
+        "a": "Short",
+        "b": "Medium",
+        "c": "Long",
+        "d": "Ultra-short"
       },
-      "explanations": {
-        "a": "Correct. ESP8266/ESP32 supports Wi-Fi and can work with LoRa for IoT projects. <a href='https://randomnerdtutorials.com/getting-started-with-esp32/'>Learn more</a>",
-        "b": "Incorrect. Graphics processing is not its purpose.",
-        "c": "Incorrect. It still requires power.",
-        "d": "Incorrect. It is not designed for multimedia storage."
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
+      "correct": "c",
+      "difficulty": "intermediate"
     },
     {
-      "question": "What is a key benefit of using LoRaWAN in rural IoT projects?",
+      "question": "What frequency band does LoRa use in India?",
       "answers": {
-        "a": "It covers long distances with minimal power usage",
-        "b": "It streams videos efficiently",
-        "c": "It allows online gaming in remote areas",
-        "d": "It provides free satellite TV"
+        "a": "433 MHz",
+        "b": "868 MHz",
+        "c": "915 MHz",
+        "d": "2.4 GHz"
       },
-      "explanations": {
-        "a": "Correct. LoRaWAN’s long range and low power make it ideal for rural monitoring. <a href='https://www.thethingsnetwork.org/lorawan/'>See details</a>",
-        "b": "Incorrect. LoRaWAN is not made for video streaming.",
-        "c": "Incorrect. Gaming is not its target application.",
-        "d": "Incorrect. LoRaWAN is unrelated to satellite TV."
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
+      "correct": "b",
+      "difficulty": "intermediate"
     },
     {
-      "question": "In this experiment, where is the collected sensor data sent after reaching the gateway?",
+      "question": "ESP8266/ESP32 communicates with LoRa using which interface?",
       "answers": {
-        "a": "To a cloud platform for storage and visualization",
-        "b": "Directly to a local printer",
-        "c": "To a USB flash drive",
-        "d": "To a Bluetooth headset"
+        "a": "I2C",
+        "b": "SPI",
+        "c": "UART",
+        "d": "PWM"
       },
-      "explanations": {
-        "a": "Correct. The gateway forwards data to a cloud platform for analysis. <a href='https://www.ibm.com/cloud/learn/iot'>Read more</a>",
-        "b": "Incorrect. A printer is not used in data storage.",
-        "c": "Incorrect. USB drives are not part of LoRaWAN cloud systems.",
-        "d": "Incorrect. Bluetooth headsets are unrelated."
+      "correct": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "The network server of LoRaWAN is called ___.",
+      "answers": {
+        "a": "The Things Network (TTN)",
+        "b": "IoT Hub",
+        "c": "Cloud Firestore",
+        "d": "MQTT Broker"
       },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
+      "correct": "a",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which platform is commonly used for LoRaWAN deployment?",
+      "answers": {
+        "a": "Firebase",
+        "b": "The Things Stack (TTS)",
+        "c": "AWS S3",
+        "d": "Google Drive"
+      },
+      "correct": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "LoRa nodes are also called ___ devices.",
+      "answers": {
+        "a": "Gateway",
+        "b": "End",
+        "c": "Server",
+        "d": "Cloud"
+      },
+      "correct": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "LoRaWAN is suitable for low ___ applications.",
+      "answers": {
+        "a": "Speed",
+        "b": "Power",
+        "c": "Data rate",
+        "d": "Voltage"
+      },
+      "correct": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which module is widely used for LoRa communication?",
+      "answers": {
+        "a": "NRF24L01",
+        "b": "ESP01",
+        "c": "RFM95/SX1276",
+        "d": "SIM800L"
+      },
+      "correct": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "LoRaWAN is best suited for which domain?",
+      "answers": {
+        "a": "Home Wi-Fi",
+        "b": "Smart Agriculture",
+        "c": "Gaming",
+        "d": "Video Streaming"
+      },
+      "correct": "b",
+      "difficulty": "intermediate"
     }
   ]
 }
