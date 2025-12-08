@@ -1,4 +1,4 @@
-## References
+### References
 
 1. LoRa Alliance, "LoRaWAN 1.1 Specification Overview", Available at: https://lora-alliance.org
 2. The Things Network, "LoRaWAN Device Activation Methods", Available at: https://www.thethingsnetwork.org/docs
