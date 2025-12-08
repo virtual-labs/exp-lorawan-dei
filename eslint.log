@@ -1,0 +1,6 @@
+
+/home/runner/work/exp-lorawan-dei/exp-lorawan-dei/experiment/simulation/script.js
+  223:11  warning  'airtime' is assigned a value but never used  no-unused-vars
+
+✖ 1 problem (0 errors, 1 warning)
+
