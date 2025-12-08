@@ -1,4 +1,4 @@
-## Procedure
+### Procedure for the experiment is as follows:
 
 1. Open the experiment in the virtual lab for creating an IoT application using LoRaWAN and ESP8266/ESP32.  
    The LoRaWAN virtual device and dashboard interface are already available in the workspace.
