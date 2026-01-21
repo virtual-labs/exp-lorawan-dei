@@ -17,41 +17,64 @@
 
 <body>
     <div class="app-container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <div class="logo-section">
-                    <div class="logo-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                            <path d="M2 17l10 5 10-5" />
-                            <path d="M2 12l10 5 10-5" />
-                        </svg>
+
+
+        <!-- Instructions Box -->
+        <div class="instructions-container" id="instructionsBox">
+            <div class="instructions-content">
+                <div class="instructions-header">
+                    <div class="instructions-left">
+                        <div class="instructions-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3>Quick Start Guide</h3>
                     </div>
-                    <div>
-                        <h1>IoT Virtual Laboratory</h1>
-                        <p class="subtitle">LoRaWAN & ESP32/ESP8266 Simulation</p>
+                    <div class="instructions-actions">
+                        <button class="btn-icon" id="toggleInstructionsBtn" title="Collapse/Expand">
+                            <!-- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg> -->
+                        </button>
+                        <button class="btn-icon" id="dismissInstructionsBtn" title="Dismiss">
+                            <!-- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg> -->
+                        </button>
                     </div>
                 </div>
-                <div class="header-actions">
-                    <button class="btn-secondary" id="resetBtn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
-                            <path d="M21 3v5h-5" />
-                        </svg>
-                        Reset
-                    </button>
-                    <button class="btn-primary" id="helpBtn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                            <line x1="12" y1="17" x2="12.01" y2="17" />
-                        </svg>
-                        Help
-                    </button>
+                <div class="instructions-steps">
+                    <div class="instruction-step">
+                        <span class="step-number">1</span>
+                        <span class="step-text">Select your device (ESP32 or ESP8266)</span>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">2</span>
+                        <span class="step-text">Generate LoRaWAN credentials or enter your own</span>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">3</span>
+                        <span class="step-text">Configure LoRaWAN parameters (SF, bandwidth, coding rate)</span>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">4</span>
+                        <span class="step-text">Enable desired sensors to simulate</span>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">5</span>
+                        <span class="step-text">Click "Activate Device" to join the network</span>
+                    </div>
+                    <div class="instruction-step">
+                        <span class="step-number">6</span>
+                        <span class="step-text">Press the Play button to start data transmission</span>
+                    </div>
                 </div>
             </div>
-        </header>
+        </div>
 
         <!-- Main Content -->
         <main class="main-content">
@@ -233,91 +256,34 @@
                 <div class="panel-header">
                     <h2>Network Topology</h2>
                     <div class="simulation-controls">
-                        <button class="btn-icon" id="startSimBtn" title="Start Transmission">
+                        <button class="btn-primary btn-sim" id="startSimBtn">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M8 5v14l11-7z" />
                             </svg>
+                            Start Simulation
                         </button>
-                        <button class="btn-icon" id="pauseSimBtn" title="Pause" style="display:none;">
+                        <button class="btn-primary btn-sim" id="pauseSimBtn" style="display:none;">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <rect x="6" y="4" width="4" height="16" />
                                 <rect x="14" y="4" width="4" height="16" />
                             </svg>
+                            Pause Simulation
                         </button>
                     </div>
                 </div>
 
                 <div class="network-canvas" id="networkCanvas">
-                    <!-- End Device -->
-                    <div class="network-node device-node" id="endDevice">
-                        <div class="node-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="5" y="2" width="14" height="20" rx="2" />
-                                <line x1="12" y1="18" x2="12.01" y2="18" />
-                            </svg>
+                    <!-- ESP Device Images -->
+                    <div class="esp-display">
+                        <div class="esp-image-container" id="espOffContainer">
+                            <img src="esp_off.png" alt="ESP OFF" class="esp-image active" id="espOffImage">
+                            <div class="esp-label">Device Inactive</div>
                         </div>
-                        <div class="node-label">End Device</div>
-                        <div class="node-sublabel" id="deviceType">ESP32</div>
-                        <div class="signal-indicator"></div>
-                    </div>
-
-                    <!-- Gateway -->
-                    <div class="network-node gateway-node" id="gateway">
-                        <div class="node-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12.55a11 11 0 0 1 14.08 0" />
-                                <path d="M1.42 9a16 16 0 0 1 21.16 0" />
-                                <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
-                                <circle cx="12" cy="20" r="1" />
-                            </svg>
+                        <div class="esp-image-container" id="espOnContainer" style="display: none;">
+                            <img src="esp_on.png" alt="ESP ON" class="esp-image" id="espOnImage">
+                            <div class="esp-label">Device Active</div>
                         </div>
-                        <div class="node-label">LoRaWAN Gateway</div>
-                        <div class="node-sublabel">868 MHz</div>
                     </div>
-
-                    <!-- Network Server -->
-                    <div class="network-node server-node" id="networkServer">
-                        <div class="node-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="2" width="20" height="8" rx="2" />
-                                <rect x="2" y="14" width="20" height="8" rx="2" />
-                                <line x1="6" y1="6" x2="6.01" y2="6" />
-                                <line x1="6" y1="18" x2="6.01" y2="18" />
-                            </svg>
-                        </div>
-                        <div class="node-label">Network Server</div>
-                        <div class="node-sublabel">Processing</div>
-                    </div>
-
-                    <!-- Application Server -->
-                    <div class="network-node app-node" id="appServer">
-                        <div class="node-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 20h20" />
-                                <path d="M5 20V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16" />
-                                <path d="M9 6h6" />
-                                <path d="M9 10h6" />
-                                <path d="M9 14h6" />
-                            </svg>
-                        </div>
-                        <div class="node-label">Application Server</div>
-                        <div class="node-sublabel">Data Storage</div>
-                    </div>
-
-                    <!-- Connection Lines -->
-                    <svg class="connection-lines" id="connectionSVG">
-                        <defs>
-                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                <polygon points="0 0, 10 3, 0 6" fill="rgba(139, 92, 246, 0.5)" />
-                            </marker>
-                        </defs>
-                        <path id="line1" class="connection-line" marker-end="url(#arrowhead)" />
-                        <path id="line2" class="connection-line" marker-end="url(#arrowhead)" />
-                        <path id="line3" class="connection-line" marker-end="url(#arrowhead)" />
-                    </svg>
-
-                    <!-- Animated Packets -->
-                    <div id="packetsContainer"></div>
                 </div>
 
                 <!-- Transmission Log -->
