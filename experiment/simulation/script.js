@@ -29,8 +29,6 @@ const state = {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     initializeEventListeners();
-    updateConnectionLines();
-    window.addEventListener('resize', updateConnectionLines);
 });
 
 // Event Listeners
@@ -95,6 +93,52 @@ function initializeEventListeners() {
     document.getElementById('helpModal').addEventListener('click', (e) => {
         if (e.target.id === 'helpModal') showModal(false);
     });
+
+    // Dismiss instructions
+    document.getElementById('dismissInstructionsBtn').addEventListener('click', dismissInstructions);
+    
+    // Toggle instructions
+    document.getElementById('toggleInstructionsBtn').addEventListener('click', toggleInstructions);
+}
+
+// Toggle Instructions
+function toggleInstructions() {
+    const stepsContainer = document.querySelector('.instructions-steps');
+    const toggleBtn = document.getElementById('toggleInstructionsBtn');
+    
+    if (!stepsContainer || !toggleBtn) {
+        console.error('Instructions elements not found');
+        return;
+    }
+    
+    const isCollapsed = stepsContainer.classList.contains('collapsed');
+    
+    if (isCollapsed) {
+        stepsContainer.classList.remove('collapsed');
+        toggleBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+            </svg>
+        `;
+        console.log('Expanded');
+    } else {
+        stepsContainer.classList.add('collapsed');
+        toggleBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="18 15 12 9 6 15"/>
+            </svg>
+        `;
+        console.log('Collapsed');
+    }
+}
+
+// Dismiss Instructions
+function dismissInstructions() {
+    const instructionsBox = document.getElementById('instructionsBox');
+    instructionsBox.style.animation = 'slideOut 0.3s ease-out';
+    setTimeout(() => {
+        instructionsBox.classList.add('hidden');
+    }, 300);
 }
 
 // Device Selection
@@ -158,6 +202,10 @@ function activateDevice() {
     setTimeout(() => {
         addLog('success', `${state.device.toUpperCase()} successfully joined LoRaWAN network!`);
         addLog('info', 'Ready to transmit data. Click Play to start.');
+        
+        // Show ESP ON image when device is activated
+        document.getElementById('espOffContainer').style.display = 'none';
+        document.getElementById('espOnContainer').style.display = 'flex';
     }, 2500);
 }
 
@@ -181,6 +229,7 @@ function pauseTransmission() {
     state.isTransmitting = false;
     document.getElementById('startSimBtn').style.display = 'flex';
     document.getElementById('pauseSimBtn').style.display = 'none';
+    
     addLog('warning', 'Transmission paused');
 }
 
@@ -228,6 +277,23 @@ function transmitData() {
 
 // Animate Packet
 function animatePacket(data) {
+    // Update dashboard immediately with received data
+    state.packetsReceived++;
+    updateDashboard(data);
+    addLog('success', `Frame #${state.frameCounter}: Data received at Application Server`);
+    
+    // Optional: Add visual packet animation if network nodes exist
+    const canvas = document.getElementById('networkCanvas');
+    const device = document.getElementById('endDevice');
+    const gateway = document.getElementById('gateway');
+    const networkServer = document.getElementById('networkServer');
+    const appServer = document.getElementById('appServer');
+
+    // Only animate if all network elements exist
+    if (!device || !gateway || !networkServer || !appServer) {
+        return;
+    }
+
     const packet = document.createElement('div');
     packet.className = 'packet';
     packet.style.cssText = `
@@ -240,12 +306,6 @@ function animatePacket(data) {
         z-index: 10;
         pointer-events: none;
     `;
-
-    const canvas = document.getElementById('networkCanvas');
-    const device = document.getElementById('endDevice');
-    const gateway = document.getElementById('gateway');
-    const networkServer = document.getElementById('networkServer');
-    const appServer = document.getElementById('appServer');
 
     canvas.appendChild(packet);
 
@@ -277,12 +337,9 @@ function animatePacket(data) {
         packet.style.top = (appRect.top - canvasRect.top + appRect.height / 2) + 'px';
     }, 1700);
 
-    // Remove packet and update data
+    // Remove packet
     setTimeout(() => {
         packet.remove();
-        state.packetsReceived++;
-        updateDashboard(data);
-        addLog('success', `Frame #${state.frameCounter}: Data received at Application Server`);
     }, 2500);
 }
 
