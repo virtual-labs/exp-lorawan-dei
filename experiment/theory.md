@@ -98,7 +98,7 @@ An **End Node** is a low-power IoT device that:
 
 In this experiment, **ESP8266 / ESP32 combined with a LoRa module** acts as the LoRaWAN end node.
 
-<div><img src="./images/esp32.jpg" width="55%"></div>  
+<div><img src="./images/esp_on.png" width="55%"></div>  
 
 #### LoRaWAN Gateway
 
