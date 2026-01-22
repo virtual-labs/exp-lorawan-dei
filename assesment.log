@@ -1,0 +1,73 @@
+=/pretest.json
+{
+  _: [],
+  f: [
+    '/home/runner/work/exp-lorawan-dei/exp-lorawan-dei/experiment/pretest.json'
+  ],
+  files: [
+    '/home/runner/work/exp-lorawan-dei/exp-lorawan-dei/experiment/pretest.json'
+  ],
+  c: 'assessment',
+  contentTypes: 'assessment',
+  'content-types': 'assessment',
+  '$0': 'validate'
+}
+Validated true
+=/posttest.json
+{
+  _: [],
+  f: [
+    '/home/runner/work/exp-lorawan-dei/exp-lorawan-dei/experiment/posttest.json'
+  ],
+  files: [
+    '/home/runner/work/exp-lorawan-dei/exp-lorawan-dei/experiment/posttest.json'
+  ],
+  c: 'assessment',
+  contentTypes: 'assessment',
+  'content-types': 'assessment',
+  '$0': 'validate'
+}
+/questions/0: must have required property 'correctAnswer'
+
+/questions/0: must NOT have additional properties
+
+/questions/1: must have required property 'correctAnswer'
+
+/questions/1: must NOT have additional properties
+
+/questions/2: must have required property 'correctAnswer'
+
+/questions/2: must NOT have additional properties
+
+/questions/3: must have required property 'correctAnswer'
+
+/questions/3: must NOT have additional properties
+
+/questions/4: must have required property 'correctAnswer'
+
+/questions/4: must NOT have additional properties
+
+/questions/5: must have required property 'correctAnswer'
+
+/questions/5: must NOT have additional properties
+
+/questions/6: must have required property 'correctAnswer'
+
+/questions/6: must NOT have additional properties
+
+/questions/7: must have required property 'correctAnswer'
+
+/questions/7: must NOT have additional properties
+
+/questions/8: must have required property 'correctAnswer'
+
+/questions/8: must NOT have additional properties
+
+/questions/9: must have required property 'correctAnswer'
+
+/questions/9: must NOT have additional properties
+
+Json Error: must match "then" schema
+Json Error: must match "then" schema
+Failed while validating /home/runner/work/exp-lorawan-dei/exp-lorawan-dei/experiment/posttest.json
+Error: Schema is Invalid

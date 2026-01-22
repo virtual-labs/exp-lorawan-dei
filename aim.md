@@ -1,0 +1,1 @@
+To simulate long-range, low-power communication using LoRaWAN integrated with ESP8266/ESP32 for IoT applications. The objective is to understand gateway communication, device registration, and LPWAN-based data transmission.
