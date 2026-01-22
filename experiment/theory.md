@@ -66,7 +66,7 @@ ESP32 is often preferred due to:
 - Better power management features  
 - Multiple peripheral interfaces  
 
-<div><img src="./images/sx1278.jpg" width="40%"></div>  
+<div><img src="./images/sx1278.jpg" width="20%"></div>  
 
 #### LoRaWAN Network Architecture
 
@@ -98,7 +98,7 @@ An **End Node** is a low-power IoT device that:
 
 In this experiment, **ESP8266 / ESP32 combined with a LoRa module** acts as the LoRaWAN end node.
 
-<div><img src="./images/esp_on.png" width="55%"></div>  
+<div><img src="./images/esp_on.png" width="35%"></div>  
 
 #### LoRaWAN Gateway
 
