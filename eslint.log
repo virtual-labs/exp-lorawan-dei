@@ -1,0 +1,7 @@
+
+/home/runner/work/exp-lorawan-dei/exp-lorawan-dei/experiment/simulation/script.js
+  272:11  warning  'airtime' is assigned a value but never used       no-unused-vars
+  420:10  warning  'updateConnectionLines' is defined but never used  no-unused-vars
+
+✖ 2 problems (0 errors, 2 warnings)
+

@@ -1,0 +1,115 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. LoRaWAN stands for ___?",
+      "answers": {
+        "a": "Long Range Wide Area Network",
+        "b": "Low Range Wireless Access Network",
+        "c": "Local Radio Wide Access Network",
+        "d": "Long Radio Wireless Area Network"
+      },
+      "correctAnswer": "a",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "2. LoRa is mainly used for ___-range communication.",
+      "answers": {
+        "a": "Short",
+        "b": "Medium",
+        "c": "Long",
+        "d": "Ultra-short"
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "3. What frequency band does LoRa use in India?",
+      "answers": {
+        "a": "433 MHz",
+        "b": "868 MHz",
+        "c": "915 MHz",
+        "d": "2.4 GHz"
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "4. ESP8266/ESP32 communicates with LoRa using which interface?",
+      "answers": {
+        "a": "I2C",
+        "b": "SPI",
+        "c": "UART",
+        "d": "PWM"
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "5. The network server of LoRaWAN is called ___.",
+      "answers": {
+        "a": "The Things Network (TTN)",
+        "b": "IoT Hub",
+        "c": "Cloud Firestore",
+        "d": "MQTT Broker"
+      },
+      "correctAnswer": "a",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "6. Which platform is commonly used for LoRaWAN deployment?",
+      "answers": {
+        "a": "Firebase",
+        "b": "The Things Stack (TTS)",
+        "c": "AWS S3",
+        "d": "Google Drive"
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "7. LoRa nodes are also called ___ devices.",
+      "answers": {
+        "a": "Gateway",
+        "b": "End",
+        "c": "Server",
+        "d": "Cloud"
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "8. LoRaWAN is suitable for low ___ applications.",
+      "answers": {
+        "a": "Speed",
+        "b": "Power",
+        "c": "Data rate",
+        "d": "Voltage"
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "9. Which module is widely used for LoRa communication?",
+      "answers": {
+        "a": "NRF24L01",
+        "b": "ESP01",
+        "c": "RFM95/SX1276",
+        "d": "SIM800L"
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "10. LoRaWAN is best suited for which domain?",
+      "answers": {
+        "a": "Home Wi-Fi",
+        "b": "Smart Agriculture",
+        "c": "Gaming",
+        "d": "Video Streaming"
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    }
+  ]
+}
