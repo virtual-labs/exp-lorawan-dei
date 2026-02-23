@@ -66,7 +66,7 @@ ESP32 is often preferred due to:
 - Better power management features  
 - Multiple peripheral interfaces  
 
-<div><img src="./images/sx1278.jpg" width="40%"></div>  
+<div><img src="./images/sx1278.jpg" width="20%"></div>  
 
 #### LoRaWAN Network Architecture
 
@@ -98,7 +98,7 @@ An **End Node** is a low-power IoT device that:
 
 In this experiment, **ESP8266 / ESP32 combined with a LoRa module** acts as the LoRaWAN end node.
 
-<div><img src="./images/esp_on.png" width="55%"></div>  
+<div><img src="./images/esp_on.png" width="35%"></div>  
 
 #### LoRaWAN Gateway
 
@@ -182,9 +182,13 @@ This experiment provides a comprehensive understanding of building an IoT applic
 
 #### References
 
-1. LoRa Alliance – LoRaWAN Specification  
-2. Semtech LoRa Technology Documentation  
-3. Espressif ESP8266 & ESP32 Technical Reference  
-4. Internet of Things: A Hands-on Approach – Arshdeep Bahga  
-5. Wireless Sensor Networks – IEEE Publications  
+[1] LoRa Alliance, “LoRaWAN 1.1 Specification Overview.” [Online]. Available: https://lora-alliance.org
+
+[2] The Things Network, “LoRaWAN Device Activation Methods.” [Online]. Available: https://www.thethingsnetwork.org/docs
+
+[3] Espressif Systems, “ESP32 Documentation: LoRa Communication Basics.” [Online]. Available: https://docs.espressif.com
+
+[4] S. Mistry, “LoRa and LoRaWAN for Arduino.” GitHub Documentation, 2020.
+
+[5] Microchip Technology Inc., “AN1200.22: LoRa Modulation Basics.” Microchip Application Note, 2019.
 
